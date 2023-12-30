@@ -21,6 +21,7 @@ typedef struct{
 
 // Functions
 void create_buffer(lifo_buffer_t* buffer, uint32_t length);
+void destroy_buffer(lifo_buffer_t* buffer);
 void add_to_buffer(lifo_buffer_t* buffer, uint8_t element);
 uint8_t remove_from_buffer(lifo_buffer_t* buffer);
 void print_buffer(lifo_buffer_t* buffer);

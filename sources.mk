@@ -18,8 +18,8 @@ SOURCES = $(LIBS) \
 TESTSOURCES = $(LIBS) \
 	$(UNITY_ROOT)/src/unity.c \
   	$(UNITY_ROOT)/extras/fixture/src/unity_fixture.c \
-  	tests/TestProductionCode2.c \
-	tests/test_runners/TestProductionCode2_Runner.c \
+	tests/lifo_buffer_tests.c \
+	tests/test_runners/lifo_buffer_tests_runner.c \
  	tests/test_runners/all_tests.c
 
 # Add your include paths to this variable
