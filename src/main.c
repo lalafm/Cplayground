@@ -18,6 +18,6 @@ int main(void)
     printf("%c\n", remove_from_buffer(&bufferTest));
     printf("%c\n", remove_from_buffer(&bufferTest));
     print_buffer(&bufferTest);
-
+    destroy_buffer(&bufferTest);
     return 0;
 }

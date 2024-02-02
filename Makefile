@@ -31,42 +31,68 @@
 include sources.mk
 
 # Platform Overrides
-TARGET = final
+TARGET = final.exe
+TARGETTEST = final_tests.exe
 
 # Compiler Flags and Defines
-CC = gcc
-CFLAGS = -DHOST 
-CPPFLAGS = -Wall -Werror -g -O0 -std=c99 $(INCLUDES)
+C_COMPILER = gcc
+CPPFLAGS = -g -O0 -std=c99
 SIZE = arm-none-eabi-size
+
+#CFLAGS = -DHOST 
+CFLAGS += -Wall
+CFLAGS += -Werror
+CFLAGS += -Wextra
+CFLAGS += -Wpointer-arith
+CFLAGS += -Wcast-align
+CFLAGS += -Wwrite-strings
+CFLAGS += -Wswitch-default
+CFLAGS += -Wunreachable-code
+CFLAGS += -Winit-self
+CFLAGS += -Wmissing-field-initializers
+CFLAGS += -Wno-unknown-pragmas
+CFLAGS += -Wstrict-prototypes
+CFLAGS += -Wundef
+CFLAGS += -Wold-style-definition
+
+SYMBOLS = -DUNITY_FIXTURE_NO_EXTRAS
 
 OBJS = $(SOURCES:.c=.o)
 
 %.d: %.c 
-	$(CC) -E -M $< $(CPPFLAGS) $(CFLAGS) -o $@
+	$(C_COMPILER) -E -M $< $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -o $@
 
 %.o: %.c 
-	$(CC) -c $< $(CPPFLAGS) $(CFLAGS) -o $@
+	$(C_COMPILER) -c $< $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -o $@
 
 %.i: %.c 
-	$(CC) -E $< $(CPPFLAGS) $(CFLAGS) -o $@
+	$(C_COMPILER) -E $< $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -o $@
 
-%.asm: %.c %.o $(TARGET).out
-	$(CC) -S $< $(CPPFLAGS) $(CFLAGS) -o $@
+%.asm: %.c %.o $(TARGET)
+	$(C_COMPILER) -S $< $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -o $@
 	OBJDUMP -d $(word 2,$^)
 
-$(TARGET).exe: $(OBJS)
-	$(CC) $(OBJS) $(CPPFLAGS) $(CFLAGS) -o $@ 
+$(TARGET): $(OBJS)
+	$(C_COMPILER) $(OBJS) $(CPPFLAGS) $(CFLAGS) $(INCLUDES) -o $@ 
 	SIZE $@ 
+	./$(TARGET)
+
+$(TARGETTEST): clean
+	$(C_COMPILER) $(CFLAGS) $(CPPFLAGS) $(TESTINCLUDES) $(SYMBOLS) $(TESTSOURCES) -o $(TARGETTEST) 
+	./$(TARGETTEST)
 
 .PHONY: build
-build: $(TARGET).exe
+build: $(TARGET)
+
+.PHONY: tests
+tests: $(TARGETTEST)
 
 .PHONY: compile-all
 compile-all: $(OBJS)
 
 .PHONY: debug
-debug: $(TARGET).exe
+debug: $(TARGET)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJS) $(TARGET).exe *.asm *.i *.o *.d
+	rm -f $(OBJS) $(TARGET) $(TARGETTEST) *.asm *.i *.o *.d

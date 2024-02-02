@@ -11,14 +11,17 @@ lifo_flags_e check_status(lifo_buffer_t* buffer);
 //create buffer
 void create_buffer(lifo_buffer_t* buffer, uint32_t length)
 {
-    buffer->size = length;
-    buffer->flag = LIFO_FLAGS_NULL;
-    if(length > 0 && buffer != NULL)
+    if(buffer != NULL)
     {
-        buffer->base = (uint8_t*)malloc(sizeof(uint8_t)*length);
-        buffer->flag = (buffer->base) ? LIFO_FLAGS_EMPTY : LIFO_FLAGS_NULL;
-    }
-    buffer->head = buffer->base;
+        buffer->size = length;
+        buffer->flag = LIFO_FLAGS_NULL;
+        if(length > 0)
+        {
+            buffer->base = (uint8_t*)malloc(sizeof(uint8_t)*length);
+            buffer->flag = (buffer->base) ? LIFO_FLAGS_EMPTY : LIFO_FLAGS_NULL;
+            buffer->head = buffer->base;
+        }
+    }  
 }
 
 //add element to buffer
