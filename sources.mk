@@ -10,7 +10,8 @@
 #*****************************************************************************
 
 # Add your Source files to this variable
-LIBS = ./libs/lifo_buffer.c
+LIBS = ./libs/lifo_buffer.c \
+	./libs/fifo_buffer.c
 
 SOURCES = $(LIBS) \
 	./src/main.c
@@ -19,13 +20,14 @@ TESTSOURCES = $(LIBS) \
 	$(UNITY_ROOT)/src/unity.c \
   	$(UNITY_ROOT)/extras/fixture/src/unity_fixture.c \
 	tests/lifo_buffer_tests.c \
-	tests/test_runners/lifo_buffer_tests_runner.c \
+	tests/fifo_buffer_tests.c \
+	tests/test_runners/buffer_tests_runner.c \
  	tests/test_runners/all_tests.c
 
 # Add your include paths to this variable
-INCLUDES = -I ./libs
+INCLUDES = -I ./inc
 
-TESTINCLUDES = -I ./libs \
+TESTINCLUDES = -I ./inc \
 	-I$(UNITY_ROOT)/src \
 	-I$(UNITY_ROOT)/extras/fixture/src \
 	-I$(UNITY_ROOT)/extras/memory/src
