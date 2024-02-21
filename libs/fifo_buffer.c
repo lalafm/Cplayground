@@ -13,12 +13,14 @@ bool create_fifo_buffer(fifo_buffer_t* buffer, uint32_t length)
         if(length > 0)
         {
             buffer->base = (uint8_t*)malloc(sizeof(uint8_t)*length);
+            // in case allocation was successful
             if(buffer->base != NULL)
             {
                 buffer->flag = FIFO_FLAGS_EMPTY;
                 success = true;               
             }      
         }
+        // at start: base = head = tail
         buffer->head = buffer->base;
         buffer->tail = buffer->head;     
     }

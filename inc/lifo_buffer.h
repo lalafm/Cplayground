@@ -20,11 +20,11 @@ typedef struct{
 }lifo_buffer_t;
 
 // Functions
-void create_buffer(lifo_buffer_t* buffer, uint32_t length);
-void destroy_buffer(lifo_buffer_t* buffer);
-void add_to_buffer(lifo_buffer_t* buffer, uint8_t element);
-uint8_t remove_from_buffer(lifo_buffer_t* buffer);
-void print_buffer(lifo_buffer_t* buffer);
-lifo_flags_e check_status(lifo_buffer_t* buffer);
+void create_lifo_buffer(lifo_buffer_t* buffer, uint32_t length);
+void destroy_lifo_buffer(lifo_buffer_t* buffer);
+void add_to_lifo_buffer(lifo_buffer_t* buffer, uint8_t element);
+uint8_t remove_from_lifo_buffer(lifo_buffer_t* buffer);
+void print_lifo_buffer(lifo_buffer_t* buffer);
+lifo_flags_e check_lifo_status(lifo_buffer_t* buffer);
 
 #endif

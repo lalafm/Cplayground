@@ -3,11 +3,14 @@
 
 TEST_GROUP_RUNNER(LifoBuffer)
 {
-  RUN_TEST_CASE(LifoBuffer, create_buffer_success_1);
-  RUN_TEST_CASE(LifoBuffer, create_buffer_fail_length_0_2);
-  RUN_TEST_CASE(LifoBuffer, create_buffer_fail_buffer_null_3);
-  RUN_TEST_CASE(LifoBuffer, create_buffer_add_word_full_4);
-  RUN_TEST_CASE(LifoBuffer, create_buffer_add_word_not_full_5);
+  RUN_TEST_CASE(LifoBuffer, create_lifo_buffer_success_1);
+  RUN_TEST_CASE(LifoBuffer, create_lifo_buffer_fail_length_0_2);
+  RUN_TEST_CASE(LifoBuffer, create_lifo_buffer_fail_buffer_null_3);
+  RUN_TEST_CASE(LifoBuffer, create_lifo_buffer_add_word_full_4);
+  RUN_TEST_CASE(LifoBuffer, create_lifo_buffer_add_word_not_full_5);
+  RUN_TEST_CASE(LifoBuffer, print_lifo_buffer_fail_6);
+  RUN_TEST_CASE(LifoBuffer, print_lifo_buffer_casio_success_7);
+  RUN_TEST_CASE(LifoBuffer, destroy_lifo_buffer_8);
 }
 
 TEST_GROUP_RUNNER(FifoBuffer)
